@@ -141,7 +141,7 @@ streamlit run deployment/app.py
 
 ## 👤 Author
 
-**Your Name**  
+**Jaivardhan Singh**  
 Deep Learning | Computer Vision | Data Science
 
 ---
