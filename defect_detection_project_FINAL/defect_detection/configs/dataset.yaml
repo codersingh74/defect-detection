@@ -1,0 +1,18 @@
+# YOLOv8 Dataset Configuration
+# Place this file at: configs/dataset.yaml
+
+path: ../data/annotations   # Root dataset directory
+train: train/images          # Train images path
+val: val/images              # Val images path
+test: test/images            # Test images path
+
+# Number of classes
+nc: 5                        # Exclude "good" class for detection
+
+# Class names (defect types only)
+names:
+  0: scratch
+  1: dent
+  2: crack
+  3: contamination
+  4: bent

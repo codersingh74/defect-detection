@@ -1,0 +1,70 @@
+# ============================================================
+# Defect Detection — Main Configuration
+# ============================================================
+
+project:
+  name: "Automated Defect Detection"
+  version: "1.0.0"
+
+# ── Paths ────────────────────────────────────────────────────
+paths:
+  data_dir: "data/raw"
+  processed_dir: "data/processed"
+  annotations_dir: "data/annotations"
+  models_dir: "models"
+  results_dir: "results"
+  plots_dir: "results/plots"
+
+# ── Dataset ──────────────────────────────────────────────────
+dataset:
+  classes:
+    - "good"
+    - "scratch"
+    - "dent"
+    - "crack"
+    - "contamination"
+    - "bent"
+  num_classes: 6
+  image_size: 224          # For CNN / ResNet
+  yolo_image_size: 640     # For YOLOv8
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+  seed: 42
+
+# ── Training ─────────────────────────────────────────────────
+training:
+  batch_size: 32
+  num_workers: 4
+  epochs: 50
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  early_stopping_patience: 10
+  device: "cuda"            # "cuda" or "cpu"
+
+# ── Model ────────────────────────────────────────────────────
+model:
+  backbone: "resnet50"      # "custom_cnn" | "resnet50" | "yolov8"
+  pretrained: true
+  dropout: 0.4
+  freeze_layers: true       # Freeze early layers for transfer learning
+
+# ── Augmentation ─────────────────────────────────────────────
+augmentation:
+  horizontal_flip: 0.5
+  vertical_flip: 0.3
+  rotation_limit: 30
+  brightness_contrast: 0.3
+  gaussian_noise: 0.2
+  elastic_transform: 0.2
+  normalize_mean: [0.485, 0.456, 0.406]
+  normalize_std: [0.229, 0.224, 0.225]
+
+# ── YOLOv8 ───────────────────────────────────────────────────
+yolo:
+  model_size: "n"           # n/s/m/l/x
+  epochs: 100
+  patience: 20
+  mosaic: 0.5
+  conf_threshold: 0.25
+  iou_threshold: 0.45
